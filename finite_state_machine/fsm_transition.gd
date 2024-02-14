@@ -30,14 +30,27 @@ class_name FSMTransition extends BehaviourToolkit
 		event = value
 		update_configuration_warnings()
 
+var csChild: FSMTransition_CS = null
+
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+
+	var child = get_child(0)
+	if (child is FSMTransition_CS):
+		csChild = child
 
 ## Executed when the transition is taken.
 func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if (csChild != null):
+		csChild._OnTransition(_delta, _actor, _blackboard.content)
 
 
 ## Evaluates true, if the transition conditions are met.
 func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
+	if (csChild != null):
+		return csChild._IsValid(_actor, _blackboard.content)
 	return false
 
 

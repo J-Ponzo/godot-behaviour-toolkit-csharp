@@ -13,12 +13,16 @@ class_name FSMState extends BehaviourToolkit
 
 ## List of transitions from this state.
 var transitions: Array[FSMTransition] = []
-
+var csChild: FSMState_CS = null
 
 func _ready() -> void:
 	# Don't run in editor
 	if Engine.is_editor_hint():
 		return
+
+	var child = get_child(0)
+	if (child is FSMState_CS):
+		csChild = child
 
 	for transition in get_children():
 		if transition is FSMTransition:
@@ -27,17 +31,20 @@ func _ready() -> void:
 
 ## Executes after the state is entered.
 func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if (csChild != null):
+		csChild._OnEnter(_actor, _blackboard.content)
 
 
 ## Executes every process call, if the state is active.
 func _on_update(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if (csChild != null):
+		csChild._OnUpdate(_delta, _actor, _blackboard.content)
 
 
 ## Executes before the state is exited.
 func _on_exit(_actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if (csChild != null):
+		csChild._OnExit(_actor, _blackboard.content)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
