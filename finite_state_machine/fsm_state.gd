@@ -10,10 +10,9 @@ class_name FSMState extends BehaviourToolkit
 ## To implement your logic you can override the [code]_on_enter, _on_update and
 ## _on_exit[/code] methods when extending the node's script.
 
-
 ## List of transitions from this state.
 var transitions: Array[FSMTransition] = []
-
+@export var csharpImpl: FSMStateImpl
 
 func _ready() -> void:
 	# Don't run in editor
@@ -27,7 +26,8 @@ func _ready() -> void:
 
 ## Executes after the state is entered.
 func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if(csharpImpl != null):
+		csharpImpl._OnEnter(_actor, _blackboard)
 
 
 ## Executes every process call, if the state is active.
