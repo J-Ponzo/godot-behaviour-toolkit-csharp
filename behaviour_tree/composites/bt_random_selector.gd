@@ -19,6 +19,7 @@ func tick(delta: float, actor: Node, blackboard: Blackboard):
 	
 	var response = leaves[current_leaf].tick(delta, actor, blackboard)
 
+
 	if response == BTStatus.SUCCESS:
 		current_leaf = 0
 		is_shuffled = false
@@ -29,3 +30,8 @@ func tick(delta: float, actor: Node, blackboard: Blackboard):
 	
 	current_leaf += 1
 	return BTStatus.RUNNING
+
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

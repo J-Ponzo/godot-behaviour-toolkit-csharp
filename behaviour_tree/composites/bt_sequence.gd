@@ -24,3 +24,8 @@ func tick(delta: float, actor: Node, blackboard: Blackboard):
 	
 	current_leaf += 1
 	return BTStatus.RUNNING
+
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

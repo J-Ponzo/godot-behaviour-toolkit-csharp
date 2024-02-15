@@ -30,15 +30,20 @@ class_name FSMTransition extends BehaviourToolkit
 		event = value
 		update_configuration_warnings()
 
+@export var csharpImpl: FSMTransitionImpl
 
 ## Executed when the transition is taken.
 func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if(csharpImpl != null):
+		csharpImpl._OnTransition(_delta, _actor, _blackboard)
 
 
 ## Evaluates true, if the transition conditions are met.
 func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
-	return false
+	if(csharpImpl != null):
+		return csharpImpl._IsValid(_actor, _blackboard)
+	else:
+		return false
 
 
 func is_valid_event(current_event: String) -> bool:

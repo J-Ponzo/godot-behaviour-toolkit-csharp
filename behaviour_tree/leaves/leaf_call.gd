@@ -68,3 +68,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 		warnings.append("Target type is set to CUSTOM but no custom target is set.")
 
 	return warnings
+
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

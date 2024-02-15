@@ -55,3 +55,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 			warnings.append("BTIntegratedFSM's child node must be a FiniteStateMachine. The first child will be used as the state machine.")
 
 	return warnings
+
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

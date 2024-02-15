@@ -30,3 +30,8 @@ func tick(delta: float, actor: Node, blackboard: Blackboard):
 
 func reset(actor: Node, blackboard: Blackboard):
 	blackboard.set_value(cache_key, 0)
+
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

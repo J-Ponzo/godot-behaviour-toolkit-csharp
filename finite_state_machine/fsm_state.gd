@@ -32,12 +32,14 @@ func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
 
 ## Executes every process call, if the state is active.
 func _on_update(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if(csharpImpl != null):
+		csharpImpl._OnUpdate(_delta, _actor, _blackboard)
 
 
 ## Executes before the state is exited.
 func _on_exit(_actor: Node, _blackboard: Blackboard) -> void:
-	pass
+	if(csharpImpl != null):
+		csharpImpl._OnExit(_actor, _blackboard)
 
 
 func _get_configuration_warnings() -> PackedStringArray:

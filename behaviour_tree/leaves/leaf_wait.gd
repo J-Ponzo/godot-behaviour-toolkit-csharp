@@ -7,9 +7,7 @@ class_name LeafWait extends BTLeaf
 
 @export var wait_for_ticks: int = 100
 
-
 var ticks: int = 0
-
 
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard):
 	if ticks < wait_for_ticks:
@@ -18,3 +16,8 @@ func tick(_delta: float, _actor: Node, _blackboard: Blackboard):
 	else:
 		ticks = 0
 		return BTStatus.SUCCESS
+		
+# Prevent display of the csharpImpl parent class exported property
+func _validate_property(property):
+	if property.name == "csharpImpl":
+		property.usage = 0 

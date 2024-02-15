@@ -9,9 +9,13 @@ class_name BTLeaf extends BTBehaviour
 ## The [code]tick(actor: Node, blackboard: Blackboard)[/code] method is called
 ## every frame and should return the status.
 
+@export var csharpImpl: BTLeafImpl
 
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
-	return BTStatus.SUCCESS
+	if(csharpImpl != null):
+		return csharpImpl._Tick(_delta, _actor, _blackboard)
+	else:
+		return BTStatus.SUCCESS
 
 
 func _get_configuration_warnings() -> PackedStringArray:
