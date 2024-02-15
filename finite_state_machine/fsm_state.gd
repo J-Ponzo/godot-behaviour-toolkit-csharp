@@ -13,20 +13,20 @@ class_name FSMState extends BehaviourToolkit
 
 ## List of transitions from this state.
 var transitions: Array[FSMTransition] = []
-var csChild: FSMState_CS = null
+
+# The C# child node implementing the FSMState
+var csChild: FSMState_CS
 
 func _ready() -> void:
 	# Don't run in editor
 	if Engine.is_editor_hint():
 		return
 
-	var child = get_child(0)
-	if (child is FSMState_CS):
-		csChild = child
-
 	for transition in get_children():
 		if transition is FSMTransition:
 			transitions.append(transition)
+			
+	csChild = InteropHelper._find_cs_child(self, FSMState_CS)
 
 
 ## Executes after the state is entered.

@@ -11,7 +11,6 @@ class_name FSMTransition extends BehaviourToolkit
 ## [code]use_event[/code] to true and set the event property to the name
 ## of the event you want to listen for.
 
-
 ## The state to transition to.
 @export var next_state: FSMState:
 	set(value):
@@ -30,16 +29,15 @@ class_name FSMTransition extends BehaviourToolkit
 		event = value
 		update_configuration_warnings()
 
-var csChild: FSMTransition_CS = null
+# The C# child node implementing the FSMTransition
+var csChild: FSMTransition_CS
 
 func _ready() -> void:
 	# Don't run in editor
 	if Engine.is_editor_hint():
 		return
-
-	var child = get_child(0)
-	if (child is FSMTransition_CS):
-		csChild = child
+			
+	csChild = InteropHelper._find_cs_child(self, FSMTransition_CS)
 
 ## Executed when the transition is taken.
 func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
