@@ -3,7 +3,7 @@ using Godot.Collections;
 using System;
 
 [GlobalClass]
-public partial class BTLeafImpl : Resource
+public abstract partial class BTLeafImpl : Resource
 {
-    public BTStatusEnum _Tick(float delta, Node actor, Dictionary blackboard) { return BTStatusEnum.Success; }
+    public virtual BTStatusEnum _Tick(float delta, Node actor, Dictionary blackboard) { return BTStatusEnum.Success; }
 }
