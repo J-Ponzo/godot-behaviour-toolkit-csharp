@@ -10,6 +10,15 @@ class_name BTDecorator extends BTBehaviour
 ## The leaf the decorator is decorating.
 @onready var leaf: BTBehaviour =  _get_leaf()
 
+# The C# child node implementing the BTDecorator
+var csChild: BTDecorator_CS
+
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+			
+	csChild = InteropHelper._find_cs_child(self, BTDecorator_CS)
 
 func _get_leaf() -> BTBehaviour:
 	if get_child_count() == 0:

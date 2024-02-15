@@ -9,9 +9,21 @@ class_name BTLeaf extends BTBehaviour
 ## The [code]tick(actor: Node, blackboard: Blackboard)[/code] method is called
 ## every frame and should return the status.
 
+# The C# child node implementing the BTLeaf
+var csChild: BTLeaf_CS
+
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+			
+	csChild = InteropHelper._find_cs_child(self, BTLeaf_CS)
 
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
-	return BTStatus.SUCCESS
+	if (csChild != null):
+		return csChild._Tick(_delta, _actor, _blackboard)
+	else:
+		return BTStatus.SUCCESS
 
 
 func _get_configuration_warnings() -> PackedStringArray:

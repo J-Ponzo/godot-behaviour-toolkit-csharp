@@ -10,6 +10,15 @@ class_name BTComposite extends BTBehaviour
 ## The leaves under the composite node.
 @onready var leaves: Array = get_children()
 
+# The C# child node implementing the BTComposite
+var csChild: BTComposite_CS
+
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+			
+	csChild = InteropHelper._find_cs_child(self, BTComposite_CS)
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array = []
