@@ -13,7 +13,7 @@ class_name BTLeaf extends BTBehaviour
 
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
 	if(csharpImpl != null):
-		return csharpImpl._Tick(_delta, _actor, _blackboard)
+		return csharpImpl._Tick(_delta, _actor, _blackboard.content)
 	else:
 		return BTStatus.SUCCESS
 

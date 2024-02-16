@@ -35,13 +35,13 @@ class_name FSMTransition extends BehaviourToolkit
 ## Executed when the transition is taken.
 func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
 	if(csharpImpl != null):
-		csharpImpl._OnTransition(_delta, _actor, _blackboard)
+		csharpImpl._OnTransition(_delta, _actor, _blackboard.content)
 
 
 ## Evaluates true, if the transition conditions are met.
 func is_valid(_actor: Node, _blackboard: Blackboard) -> bool:
 	if(csharpImpl != null):
-		return csharpImpl._IsValid(_actor, _blackboard)
+		return csharpImpl._IsValid(_actor, _blackboard.content)
 	else:
 		return false
 
