@@ -12,6 +12,13 @@ class_name BTDecorator extends BTBehaviour
 
 @export var csharpImpl: BTDecoratorImpl
 
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	if(csharpImpl != null):
+		return csharpImpl._Tick(_delta, _actor, _blackboard.content)
+	else:
+		assert(false, "Base decorator tick() invoked but no csharpImpl was set. BTStatus.FAILURE will be returned")
+		return BTStatus.FAILURE
+
 func _get_leaf() -> BTBehaviour:
 	if get_child_count() == 0:
 		return null
