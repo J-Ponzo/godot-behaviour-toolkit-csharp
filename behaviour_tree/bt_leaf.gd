@@ -11,6 +11,14 @@ class_name BTLeaf extends BTBehaviour
 
 @export var csharpImpl: BTLeafImpl
 
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+	
+	if(csharpImpl != null):
+		csharpImpl._Init(self)
+
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
 	if(csharpImpl != null):
 		return csharpImpl._Tick(_delta, _actor, _blackboard.content)

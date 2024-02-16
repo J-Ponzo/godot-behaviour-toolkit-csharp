@@ -12,3 +12,11 @@ enum BTStatus {
 	FAILURE,
 	RUNNING,
 }
+
+func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
+	return BTStatus.FAILURE
+
+func tick_from_csharp(_delta: float, _actor: Node, _content: Dictionary) -> BTStatus:
+	var _blackboard: Blackboard = Blackboard.new()
+	_blackboard.content = _content
+	return tick(_delta, _actor, _blackboard)

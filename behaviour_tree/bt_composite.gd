@@ -12,6 +12,14 @@ class_name BTComposite extends BTBehaviour
 
 @export var csharpImpl: BTCompositeImpl
 
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+	
+	if(csharpImpl != null):
+		csharpImpl._Init(self)
+
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: Array = []
 	

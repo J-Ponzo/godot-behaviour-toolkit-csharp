@@ -12,6 +12,15 @@ class_name BTDecorator extends BTBehaviour
 
 @export var csharpImpl: BTDecoratorImpl
 
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+	
+	if(csharpImpl != null):
+		csharpImpl._Init(self)
+	
+
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:
 	if(csharpImpl != null):
 		return csharpImpl._Tick(_delta, _actor, _blackboard.content)
