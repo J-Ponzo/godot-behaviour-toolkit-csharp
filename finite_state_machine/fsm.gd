@@ -22,6 +22,10 @@ const ERROR_INITIAL_STATE_NULL: String = "The initial cannot be null when starti
 ## The signal emitted when the state changes.
 signal state_changed(state: FSMState)
 
+# Also emitted when state changes, but sends the state name to the receiver 
+# which is more convenient when using with C#
+signal state_changed_as_string(stateName: String)
+
 
 ## Whether the FSM should start automatically.
 @export var autostart: bool = false
@@ -98,8 +102,9 @@ func start() -> void:
 	active_state = initial_state
 	active_state._on_enter(actor, blackboard)
 
-	# Emit the state changed signal
+	# Emit the state changed signals
 	emit_signal("state_changed", active_state)
+	emit_signal("state_changed_as_string", active_state.name)
 
 
 func  _physics_process(delta: float) -> void:
@@ -154,8 +159,9 @@ func change_state(state: FSMState) -> void:
 	# Enter the new state
 	active_state._on_enter(actor, blackboard)
 
-	# Emit the state changed signal
+	# Emit the state changed signals
 	emit_signal("state_changed", active_state)
+	emit_signal("state_changed_as_string", active_state.name)
 
 
 ## Fires an event in the FSM.
