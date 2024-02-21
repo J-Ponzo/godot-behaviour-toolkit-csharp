@@ -28,9 +28,9 @@ class_name FSMStateIntegratedBT extends FSMState
 		event = value
 		update_configuration_warnings()
 
-
 ## Executes after the state is entered.
 func _on_enter(_actor: Node, _blackboard: Blackboard) -> void:
+	behaviour_tree.blackboard = _blackboard
 	behaviour_tree.active = true
 
 
