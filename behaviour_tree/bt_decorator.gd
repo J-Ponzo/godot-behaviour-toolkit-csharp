@@ -18,6 +18,7 @@ func _ready() -> void:
 		return
 	
 	if(csharpImpl != null):
+		csharpImpl = csharpImpl.duplicate()
 		csharpImpl._Init(self)
 	
 

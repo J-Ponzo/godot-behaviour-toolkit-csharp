@@ -32,6 +32,14 @@ class_name FSMTransition extends BehaviourToolkit
 
 @export var csharpImpl: FSMTransitionImpl
 
+func _ready() -> void:
+	# Don't run in editor
+	if Engine.is_editor_hint():
+		return
+
+	if (csharpImpl != null):
+		csharpImpl = csharpImpl.duplicate()
+
 ## Executed when the transition is taken.
 func _on_transition(_delta: float, _actor: Node, _blackboard: Blackboard) -> void:
 	if(csharpImpl != null):

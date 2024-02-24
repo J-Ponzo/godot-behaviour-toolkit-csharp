@@ -17,6 +17,7 @@ func _ready() -> void:
 		return
 	
 	if(csharpImpl != null):
+		csharpImpl = csharpImpl.duplicate()
 		csharpImpl._Init(self)
 
 func tick(_delta: float, _actor: Node, _blackboard: Blackboard) -> BTStatus:

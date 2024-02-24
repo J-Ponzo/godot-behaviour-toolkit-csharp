@@ -19,6 +19,9 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
+	if (csharpImpl != null):
+		csharpImpl = csharpImpl.duplicate()
+
 	for transition in get_children():
 		if transition is FSMTransition:
 			transitions.append(transition)
