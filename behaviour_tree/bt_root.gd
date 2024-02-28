@@ -46,6 +46,8 @@ func _ready() -> void:
 	
 	if blackboard == null:
 		blackboard = _create_local_blackboard()
+	else:
+		blackboard = blackboard.duplicate()
 
 	if autostart:
 		active = true
