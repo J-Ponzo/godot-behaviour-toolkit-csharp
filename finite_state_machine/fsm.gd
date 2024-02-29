@@ -51,6 +51,11 @@ signal state_changed_as_string(stateName: String)
 ## The blackboard of the FSM.
 @export var blackboard: Blackboard
 
+func get_blackboard_from_csharp() -> Dictionary:
+	return blackboard.content
+
+func set_blackboard_from_csharp(_content: Dictionary) -> void:
+	blackboard.content = _content
 
 ## The list of states in the FSM.
 var states: Array[FSMState]

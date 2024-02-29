@@ -29,6 +29,11 @@ enum ProcessType {
 @export var actor: Node
 @export var blackboard: Blackboard
 
+func get_blackboard_from_csharp() -> Dictionary:
+	return blackboard.content
+
+func set_blackboard_from_csharp(_content: Dictionary) -> void:
+	blackboard.content = _content
 
 var active: bool = false
 var current_status: BTBehaviour.BTStatus
